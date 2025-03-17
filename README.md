@@ -7,3 +7,4 @@ Creality K1 OrangePi host conversion
 
 1. Одноплатный компьютер. Я использовал Orange Pi Zero 3 1GB RAM
 2. USB-TTLx2 конвертер. И использовал https://github.com/r2axz/bluepill-serial-monster но можно купить готовый конвертер на FTDI чипе, например https://aliexpress.ru/item/1005006850550816.html
+3. DC-DC преобразователь для питания одноплатника (при необходимости) 
