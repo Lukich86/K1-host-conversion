@@ -30,13 +30,13 @@
 
 Нужно отпаять резисторы, отмеченные красным. Далее припаять к микросхеме SP3222E провода от конвертера. Будем припаиватся к пинам с ttl логическим уровнем cогласно даташиту:
 
-![](/images/sp3222E_datasheet.jpg "SP3222E datasheet")  
+![](/images/SP3222E_datasheet.jpg "SP3222E datasheet")  
 
 T1IN и R1OUT - порт печатающей головы, T2IN и R2OUT - порт платы тензодатчиков.
 Подключаем TX UART2 к T1IN, RX UART2 к R1IN и TX UART3 к T1IN, RX UART3 к R1IN
 
 
-![](/images/sp3222E_connection.jpg "SP3222E connection")  
+![](/images/SP3222E_connection.jpg "SP3222E connection")  
 
 ## 3. Отключение WiFi модуля.  
 
