@@ -4,9 +4,15 @@
 
 Устанавливаем на одноплатник хоста ОС и с помощью [KIAUH](https://github.com/dw-0/kiauh) (или любым другим удобным для вас способом) устанавливаем нужные сервисы - klipper, moonraker, fluidd или mainsall. Для установки KIAUH вводим :
 
-```sudo apt-get update && sudo apt-get install git -y```  
-```cd ~ && git clone https://github.com/dw-0/kiauh.git```   
-```./kiauh/kiauh.sh```
+```
+sudo apt-get update && sudo apt-get install git -y
+```  
+```
+cd ~ && git clone https://github.com/dw-0/kiauh.git
+```   
+```
+./kiauh/kiauh.sh
+```
 
 И далее в меню install устанавливаем нужные сервисы.
 
@@ -23,11 +29,15 @@
 
 Клонируем нужные нам репозитории:  
 
-```cd ~ && git clone https://github.com/cryoz/k1_mcu_flasher```  
+```
+cd ~ && git clone https://github.com/cryoz/k1_mcu_flasher
+```  
 
 Ищем порты к которым у нас подключены микроконтроллеры: 
 
-```dmesg | grep tty```
+```
+dmesg | grep tty
+```
 
 Получаем вывод наподобие
 ```
@@ -54,11 +64,15 @@
 
 Переходим в папку со скриптом 
 
-```cd ~/k1_mcu_flasher```
+```
+cd ~/k1_mcu_flasher
+```
 
 Перезагружаем материнскую плату (я просто снял на несколько секунд предохранитель с материнской платы и поставил обратно) и в течение 15 секунд успеваем запустить скрипт который переведет бутлоадер в режим ожидания прошивки:
 
-```python3 mcu_util.py -c -i /dev/ttyACM2 -g -v```
+```
+python3 mcu_util.py -c -i /dev/ttyACM2 -g -v
+```
 
 Где `/dev/ttyACM2` наш порт к которому подключен микроконтроллер для прошивки. В моем случае ttyACM2 это порт микроконтроллера головы. 
 
@@ -75,7 +89,9 @@ FW Version: noz0_120_G30-noz0_003_000
 ```
 После этого запускаем скрипт прошивки deployer.bin
 
-```python3 mcu_util.py -c -i /dev/ttyACM2 -v -u -f ~/deployer.bin```
+```
+python3 mcu_util.py -c -i /dev/ttyACM2 -v -u -f ~/deployer.bin
+```
 
 Если все успешно то получаем вывод:
 
@@ -105,7 +121,9 @@ App started
 
 Проверяем, что katapult установился:
 
-```python3 ~/katapult/scripts/flashtool.py -d /dev/ttyACM2 -b 230400 -s```
+```
+python3 ~/katapult/scripts/flashtool.py -d /dev/ttyACM2 -b 230400 -s
+```
 
 Если все успешно то вывод :
 
@@ -122,11 +140,15 @@ Status Request Complete
 ```
 Повторяем прошивку для основного микроконтроллера - опять перезагружаем материнскую плату и запускаем 
 
-```python3 mcu_util.py -c -i /dev/ttyACM0 -g -v```
+```
+python3 mcu_util.py -c -i /dev/ttyACM0 -g -v
+```
 
 Затем 
 
-```python3 mcu_util.py -c -i /dev/ttyACM0 -v -u -f ~/deployer.bin```
+```
+python3 mcu_util.py -c -i /dev/ttyACM0 -v -u -f ~/deployer.bin
+```
 
 Теперь бутлоадеры прошиты, можно приступать к сборке и прошивке бинарников klipper. 
 
@@ -136,8 +158,12 @@ Status Request Complete
 
 Переходим в папку с klipper и запускаем make menuconfig (или можно в KIAUH выбрать "Advanced" - "Build")
 
-```cd ~/klipper```  
-```make menuconfig```
+```
+cd ~/klipper
+```  
+```
+make menuconfig
+```
 
 Выбираем как на скриншоте:
 
@@ -145,15 +171,21 @@ Status Request Complete
 
 Выходим с сохранением настроек и запускаем сборку
 
-`make`
+```
+make
+```
 
 Теперь прошиваем получившийся бинарник  
 
-```python3 ~/katapult/scripts/flashtool.py -d /dev/ttyACM2 -b 230400 -s```
+```
+python3 ~/katapult/scripts/flashtool.py -d /dev/ttyACM2 -b 230400 -s
+```
 
 Далее
 
-```python3 ~/katapult/scripts/flashtool.py -d /dev/ttyACM2 -b 230400 -f ~/klipper/out/klipper.bin```  
+```
+python3 ~/katapult/scripts/flashtool.py -d /dev/ttyACM2 -b 230400 -f ~/klipper/out/klipper.bin
+```  
 
 Вывод должен быть:
 
